@@ -6,14 +6,17 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development node --watch index.js",
     "test": "NODE_ENV=test node --test",
+    "start:test": "NODE_ENV=test node --watch index.js",
     "lint": "eslint ."
   },
   "author": "aksekat",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.0.1",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.1"

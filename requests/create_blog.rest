@@ -1,9 +1,9 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpZCI6IjY4YTc3OGM1ZDQ2OGI1MzM0NTc4MmRiMCIsImlhdCI6MTc1NTk1MDI5NX0.R6_tXKIrhPkrl3C8qvyvmkaGpCtp2K_Hp9WFrb_VVb0
 
 {
-    "title": "testBlog",
-    "author": "Test Test",
+    "title": "New Blog Post About Making Blog Posts",
     "url": "placeholder.link",
     "likes": 12
 }

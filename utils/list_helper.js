@@ -33,7 +33,6 @@ const mostLikes = (blogs) => {
     return null
   }
   const blogsByAuthor = lodash.groupBy(blogs, 'author')
-  console.log(Object.entries(blogsByAuthor))
   const likesPerAuthor = Object.entries(blogsByAuthor).map(([author, blogs]) => ({
     author,
     likes: blogs.reduce((sum, blog) => sum + blog.likes, 0)
