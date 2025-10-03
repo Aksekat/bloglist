@@ -82,25 +82,34 @@ blogsRouter.put(
   }
 )
 
-// Add a comment to a blog
-blogsRouter.post('/:id/comments', async (req, res, next) => {
-  const { comment } = req.body
-  if (!comment || typeof comment !== 'string') {
-    return res
-      .status(400)
-      .json({ error: 'Comment is required and must be a string' })
-  }
-  try {
-    const blog = await Blog.findById(req.params.id)
-    if (!blog) {
-      return res.status(404).json({ error: 'Blog not found' })
+blogsRouter.post(
+  '/:id/comments',
+  middleware.userExtractor,
+  async (request, response, next) => {
+    const user = request.user
+    const { comment } = request.body
+
+    if (!user) {
+      return response.status(400).json({ error: 'userId missing or not valid' })
     }
-    blog.comments = blog.comments.concat(comment)
-    const updatedBlog = await blog.save()
-    res.status(201).json(updatedBlog)
-  } catch (error) {
-    next(error)
+
+    if (!comment || typeof comment !== 'string') {
+      return response
+        .status(400)
+        .json({ error: 'Comment is required and must be a string' })
+    }
+    try {
+      const blog = await Blog.findById(request.params.id)
+      if (!blog) {
+        return response.status(404).json({ error: 'Blog not found' })
+      }
+      blog.comments = blog.comments.concat(comment)
+      const updatedBlog = await blog.save()
+      response.status(201).json(updatedBlog)
+    } catch (error) {
+      next(error)
+    }
   }
-})
+)
 
 module.exports = blogsRouter
